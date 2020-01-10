@@ -133,8 +133,11 @@ public class AntiSpam extends FreedomService
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
-    public void onPlayerKick(Player player)
+    public void onPlayerKick(onPlayerKick event)
     {
-        markedfordeath.remove(player.getName());
+        if (markedfordeath.contains(event.getPlayer().getName()))
+        {
+            markedfordeath.remove(event.getPlayer.getName());
+        }
     }
 }
