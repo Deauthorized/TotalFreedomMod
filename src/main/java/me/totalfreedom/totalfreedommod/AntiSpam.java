@@ -15,7 +15,7 @@ import org.bukkit.scheduler.BukkitTask;
 public class AntiSpam extends FreedomService
 {
 
-    public static final int MSG_PER_CYCLE = 8;
+    public static final int MSG_PER_CYCLE = 4;
     public static final int TICKS_PER_CYCLE = 2 * 10;
     //
     public BukkitTask cycleTask = null;
@@ -74,15 +74,20 @@ public class AntiSpam extends FreedomService
 
         // Check for spam
         if (playerdata.incrementAndGetMsgCount() > MSG_PER_CYCLE)
-        {
-            FSync.bcastMsg(player.getName() + " was automatically kicked for spamming chat.", ChatColor.RED);
+        {   
+            FSync.bcastMsg(player.getName() + " was automatically kicked for sending too many messages.", ChatColor.RED);
             FSync.autoEject(player, "Kicked for spamming chat.");
 
             playerdata.resetMsgCount();
 
             event.setCancelled(true);
             return;
+        } else if(playerdata.incrementAndGetMsgCount() > MSG_PER_CYCLE / 2)
+        {
+            FUtil.playerMsg(player, "Please refrain from spamming chat.", ChatColor.GRAY);
+            event.setCancelled(true);
         }
+        
     }
 
     @EventHandler(priority = EventPriority.LOW)
