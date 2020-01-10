@@ -3,6 +3,7 @@ package me.totalfreedom.totalfreedommod.util;
 import java.io.File;
 import java.io.FileFilter;
 import java.lang.reflect.Field;
+import java.security.SecureRandom;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,9 +27,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitTask;
 import org.bukkit.Material;
 
@@ -56,6 +60,7 @@ public class FUtil
             ChatColor.DARK_PURPLE,
             ChatColor.LIGHT_PURPLE);
     private static Iterator<ChatColor> CHAT_COLOR_ITERATOR;
+    private static String CHARACTER_STRING = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
     static
     {
@@ -487,5 +492,41 @@ public class FUtil
                 }
             }
         }
+    }
+
+    public static char getRandomCharacter()
+    {
+        return CHARACTER_STRING.charAt(new Random().nextInt(CHARACTER_STRING.length()));
+    }
+
+    public static void give(Player player, Material material, String coloredName, int amount, String... lore)
+    {
+        ItemStack stack = new ItemStack(material, amount);
+        ItemMeta meta = stack.getItemMeta();
+        meta.setDisplayName(FUtil.colorize(coloredName));
+        List<String> loreList = new ArrayList<>();
+        for (String entry : lore)
+        {
+            loreList.add(FUtil.colorize(entry));
+        }
+        meta.setLore(loreList);
+        stack.setItemMeta(meta);
+        player.getInventory().setItem(player.getInventory().firstEmpty(), stack);
+    }
+
+    public static String generateKey(int length)
+    {
+        StringBuilder key = new StringBuilder();
+        for (int i = 0; i < length; i++)
+        {
+            key.append(getRandomCharacter());
+        }
+        return key.toString();
+    }
+
+    public static Player getRandomPlayer()
+    {
+        List<Player> players = new ArrayList<>(Bukkit.getOnlinePlayers());
+        return players.get(random(0, players.size() - 1));
     }
 }
