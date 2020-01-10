@@ -31,6 +31,8 @@ import org.bukkit.event.entity.FireworkExplodeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.event.entity.CreatureSpawnEvent;
+import me.totalfreedom.totalfreedommod.util.FLog;
 
 public class EventBlocker extends FreedomService
 {
@@ -235,5 +237,16 @@ public class EventBlocker extends FreedomService
     {
         FUtil.fixCommandVoid(event.getEntity());
         event.setDeathMessage(event.getDeathMessage());
+    }
+
+    @EventHandler(priority = EventPriority.NORMAL)
+    public void onCreatureSpawn(PlayerDeathEvent event)
+    {
+        if (event.getSpawnReason() == "BEEHIVE")
+        {
+            event.setCancelled(true);
+            // Debug log
+            FLog.info("Prevented beehive from spawning bee");
+        }
     }
 }
