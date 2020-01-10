@@ -9,7 +9,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import java.util.ArrayList;
@@ -133,7 +133,7 @@ public class AntiSpam extends FreedomService
     }
 
     @EventHandler(priority = EventPriority.NORMAL)
-    public void onPlayerQuit(Player player)
+    public void onPlayerKick(Player player)
     {
         if(markedfordeath.contains(player.getName()))
         {
