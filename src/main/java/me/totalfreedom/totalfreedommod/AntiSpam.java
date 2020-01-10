@@ -75,7 +75,7 @@ public class AntiSpam extends FreedomService
         // Check for spam
         if (playerdata.incrementAndGetMsgCount() > MSG_PER_CYCLE)
         {   
-            if(player = null)
+            if(player == null)
             {
                 // Player isn't on the server meaning they're probably already banned
                 return;
