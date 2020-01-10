@@ -75,6 +75,11 @@ public class AntiSpam extends FreedomService
         // Check for spam
         if (playerdata.incrementAndGetMsgCount() > MSG_PER_CYCLE)
         {   
+            if(player = null)
+            {
+                // Player isn't on the server meaning they're probably already banned
+                return;
+            }
             FSync.bcastMsg(player.getName() + " was automatically kicked for sending too many messages.", ChatColor.RED);
             FSync.autoEject(player, "Kicked for spamming chat.");
 
