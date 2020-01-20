@@ -461,3 +461,6 @@ amp:
   username: username
   password: password
   url: url
+  
+vpn:
+  block: false
