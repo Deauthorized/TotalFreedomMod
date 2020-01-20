@@ -142,6 +142,7 @@ public enum ConfigEntry
     MASTER_BUILDER_INFO(List.class, "masterbuilderinfo"),
     AUTO_ENTITY_WIPE(Boolean.class, "auto_wipe"),
     TOGGLE_CHAT(Boolean.class, "toggle_chat"),
+    BLOCK_PROXY(Boolean.class, "vpn.block"),
     //
     AMP_ENABLED(Boolean.class, "amp.enabled"),
     AMP_USERNAME(String.class, "amp.username"),
