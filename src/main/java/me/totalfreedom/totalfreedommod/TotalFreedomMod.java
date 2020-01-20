@@ -129,6 +129,7 @@ public class TotalFreedomMod extends AeroPlugin<TotalFreedomMod>
     public PlayerVerification pv;
     public EntityWiper ew;
     public RealTimer rt;
+    public ConnectionAuditor cad;
     //public HubWorldRestrictions hwr;
     //
     // Bridges
@@ -214,6 +215,7 @@ public class TotalFreedomMod extends AeroPlugin<TotalFreedomMod>
         gr = services.registerService(GameRuleHandler.class);
         snp = services.registerService(SignBlocker.class);
         ew = services.registerService(EntityWiper.class);
+        cad = services.registerService(ConnectionAuditor.class);
 
         // Single admin utils
         rb = services.registerService(RollbackManager.class);
